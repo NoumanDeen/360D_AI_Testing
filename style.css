@@ -14963,6 +14963,142 @@ html,
     background-color: #ffffff !important;
 }
 
+/* --- Section 1 Mobile Optimizations (Refined) --- */
+@media (max-width: 768px) {
+
+    /* Ensure body/html don't cause horizontal scroll or gaps */
+    html,
+    body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Background consistency - making it full width and reverting to white if requested */
+    .HomepageHeroBespoke_root__z4DvB,
+    #main {
+        width: 100vw !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        background-color: #ffffff !important;
+        min-height: 100svh !important;
+    }
+
+    /* Navbar Mobile Layout - Ensure it fills the screen */
+    .Nav_root__SfQ0K {
+        width: 100% !important;
+        padding: 0 !important;
+        left: 0 !important;
+    }
+
+    .Nav_root__SfQ0K .Nav_wrapper__q7293 {
+        width: 100% !important;
+        left: 0 !important;
+        transform: none !important;
+        top: 1rem !important;
+        margin: 0 !important;
+    }
+
+    .Nav_root__SfQ0K .Nav_wrapper__q7293 .Nav_mainNav__pyKU_ {
+        width: 100% !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        left: 0 !important;
+    }
+
+    .Nav_root__SfQ0K .Nav_wrapper__q7293 .Nav_mainNav__pyKU_ .Nav_routes__woI6v {
+        display: flex !important;
+        justify-content: center !important;
+        padding: 0 1rem !important;
+        width: 100% !important;
+    }
+
+    /* Hide desktop links on mobile */
+    .Nav_root__SfQ0K .Nav_wrapper__q7293 .Nav_mainNav__pyKU_ .Nav_routes__woI6v li:nth-child(1),
+    .Nav_root__SfQ0K .Nav_wrapper__q7293 .Nav_mainNav__pyKU_ .Nav_routes__woI6v li:nth-child(3) {
+        display: none !important;
+    }
+
+    /* Center Logo on mobile */
+    .Nav_root__SfQ0K .Nav_wrapper__q7293 .Nav_mainNav__pyKU_ .Nav_routes__woI6v li:nth-child(2) {
+        position: absolute !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+    }
+
+    /* Hamburger on the left */
+    .Nav_root__SfQ0K .Nav_wrapper__q7293 .Nav_mainNav__pyKU_ .Nav_hamburger__mtm_K {
+        position: absolute !important;
+        left: 1.5rem !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        border-radius: 50% !important;
+        width: 4rem !important;
+        height: 4rem !important;
+        background: rgba(255, 255, 255, 0.5) !important;
+        backdrop-filter: blur(5px) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Hide "GET THE APP" on mobile navbar */
+    .Nav_newsletterBtn__il7q7 {
+        display: none !important;
+    }
+
+    /* Section 1 Title & Padding */
+    .HomepageHeroBespoke_root__z4DvB .HomepageHeroBespoke_title__C_bJm {
+        padding-top: 10rem !important;
+        padding-bottom: 4rem !important;
+        font-size: 3.2rem !important;
+        line-height: 1.15 !important;
+        text-align: center !important;
+        max-width: 90vw !important;
+        margin: 0 auto !important;
+        color: #000000 !important;
+        font-family: var(--font-gt-standard-l), system-ui, sans-serif !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word {
+        font-size: 3.2rem !important;
+        display: inline !important;
+    }
+
+    /* Section 1 Video Wrapper */
+    .HomepageHeroBespoke_videoWrapper__clMjH {
+        width: calc(100% - 3.2rem) !important;
+        height: 80vh !important;
+        margin: 0 auto 4rem !important;
+        border-radius: 3.6rem !important;
+        clip-path: inset(0px round 3.6rem) !important;
+        -webkit-clip-path: inset(0px round 3.6rem) !important;
+    }
+
+    #heroVideoEl {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 3.6rem !important;
+        object-fit: cover !important;
+    }
+
+    /* Video controls padding adjustment */
+    .Media_videoButtonContainer__tF6cs {
+        bottom: 2rem !important;
+        left: 2rem !important;
+    }
+
+    #heroMuteButton {
+        width: 4rem !important;
+        height: 4rem !important;
+    }
+}
+
 /* --- SECTION 3: The Zoox Experience --- */
 .Section3_root {
     position: relative;
