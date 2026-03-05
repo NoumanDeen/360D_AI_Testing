@@ -29,16 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.Nav_mainNav__pyKU_');
     const navRoot = document.querySelector('nav.Nav');
     const mobilePillNav = document.getElementById('mobile-pill-nav');
-    const pillHamburger = document.getElementById('pillHamburger');
     const mainHamburger = document.querySelector('.Hamburger_root__vVMOe');
     let lastScrollY = window.scrollY;
-
-    // Wire pill hamburger to open the main nav menu
-    if (pillHamburger && mainHamburger) {
-        pillHamburger.addEventListener('click', () => {
-            mainHamburger.click();
-        });
-    }
 
     if (navMenu) {
         window.addEventListener('scroll', () => {
@@ -127,30 +119,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    // Mobile Menu Toggle
-    const hamburger = document.querySelector('.Hamburger_root__vVMOe');
-    const navWrapper = document.querySelector('.Nav_wrapper__q7293');
-    let menuOpen = false;
+    // ===== Custom Full-Screen Menu Overlay =====
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuCloseBtn = document.getElementById('menuClose');
 
-    if (hamburger && navWrapper) {
-        hamburger.addEventListener('click', () => {
-            menuOpen = !menuOpen;
-            hamburger.setAttribute('aria-expanded', menuOpen);
-            // Toggle classes for hamburger animation
-            hamburger.classList.toggle('Hamburger_isOpen__xyz'); // Using a general class if exact Zoox class is unknown
+    function openMenu() {
+        if (!menuOverlay) return;
+        menuOverlay.classList.add('is-open');
+        menuOverlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden'; // prevent body scroll
+    }
 
-            // Toggle menu visibility
-            if (menuOpen) {
-                gsap.to('.Nav_routes__woI6v', { display: 'flex', opacity: 1, duration: 0.3 });
-            } else {
-                gsap.to('.Nav_routes__woI6v', {
-                    opacity: 0, duration: 0.3, onComplete: () => {
-                        gsap.set('.Nav_routes__woI6v', { display: 'none' });
-                    }
-                });
-            }
+    function closeMenu() {
+        if (!menuOverlay) return;
+        menuOverlay.classList.remove('is-open');
+        menuOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    // Wire *all* hamburger buttons (main nav + mobile pill) to open the overlay
+    document.querySelectorAll(
+        '.Hamburger_root__vVMOe, #pillHamburger, .pill-hamburger'
+    ).forEach(btn => {
+        btn.addEventListener('click', openMenu);
+    });
+
+    // Close on X button
+    if (menuCloseBtn) menuCloseBtn.addEventListener('click', closeMenu);
+
+    // Close on backdrop click (click outside the white panel)
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', (e) => {
+            if (e.target === menuOverlay) closeMenu();
         });
     }
+
+    // Close when a nav link is clicked
+    if (menuOverlay) {
+        menuOverlay.querySelectorAll('.menu-link, .menu-footer a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+    });
+    // ===== End Menu Overlay Logic =====
 
     // --- Section 2 Animations (.HomepageContentBespoke) ---
 
@@ -243,6 +258,68 @@ document.addEventListener('DOMContentLoaded', () => {
     const crossfadeImgs = document.querySelectorAll('#section4-crossfade .crossfade-img');
     const wordOverlay = document.querySelector('#section4-crossfade .s4-word-overlay');
 
+    // --- Section 2 Mobile Image Scale Animation ---
+    const section2MobileImage = document.querySelector('.section2-mobile-image img');
+    if (section2MobileImage && window.innerWidth <= 768) {
+        gsap.fromTo('.section2-mobile-image img',
+            {
+                scale: 0.85,
+                opacity: 0.5
+            },
+            {
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.section2-mobile-image',
+                    start: 'top 80%',
+                    end: 'top 30%',
+                    scrub: 1,
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+
+        // Also animate the text elements
+        gsap.fromTo('.section2-mobile-eyebrow',
+            {
+                y: 30,
+                opacity: 0
+            },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.section2-mobile-eyebrow',
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+
+        gsap.fromTo('.section2-mobile-heading',
+            {
+                y: 30,
+                opacity: 0
+            },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                delay: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.section2-mobile-heading',
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+    }
+
     if (crossfadeText.length > 0 && crossfadeImgs.length > 0) {
         let currentIndex = 0;
 
@@ -314,4 +391,393 @@ document.addEventListener('DOMContentLoaded', () => {
         s4Observer.observe(cardWrap);
         updateSection4Mask();
     }
+
+    // --- Section 4 Scroll Animation (Desktop Only) ---
+    if (window.innerWidth > 768) {
+        const section4 = document.getElementById('section4-crossfade');
+        const s4TextCard = document.querySelector('#section4-crossfade .Section3_textCard');
+        const s4Images = document.querySelectorAll('#section4-crossfade .crossfade-img');
+
+        if (section4 && s4TextCard) {
+            // Give the glass panel a slick entrance from the left
+            gsap.fromTo(s4TextCard,
+                {
+                    x: -200,
+                    opacity: 0,
+                    filter: 'blur(10px)'
+                },
+                {
+                    x: 0,
+                    opacity: 1,
+                    filter: 'blur(0px)',
+                    duration: 1.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: section4,
+                        start: "top 70%", // Start early enough to be seen entering
+                        end: "center center",
+                        scrub: 1 // Link to scroll for that butter-smooth feeling
+                    }
+                }
+            );
+
+            // Subtle parallax zoom on the background images as you scroll through the section
+            s4Images.forEach(img => {
+                gsap.fromTo(img,
+                    { scale: 1 },
+                    {
+                        scale: 1.1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: section4,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true
+                        }
+                    }
+                );
+            });
+        }
+    }
+
+    // --- Section 5: Feature Section Animations (Apple-style) ---
+    const section5 = document.getElementById('section5-feature');
+    if (section5) {
+        // 1. Text entrance (Top Area)
+        const topTextElements = section5.querySelectorAll('.s5-eyebrow, .s5-subpara');
+        if (topTextElements.length > 0) {
+            gsap.fromTo(topTextElements,
+                { y: 60, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    stagger: 0.2,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '.s5-text-top',
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        }
+
+        // 2. Image scales from small to big on scroll (DESKTOP ONLY)
+        if (window.innerWidth > 768) {
+            // Give the wrapper hidden overflow if it doesn't have it, and scale the image smoothly
+            gsap.set('.s5-image-wrapper', { overflow: 'hidden', borderRadius: '3.6rem', transform: 'translateZ(0)' });
+
+            gsap.fromTo('.s5-image-wrapper',
+                {
+                    scale: 0.85,
+                    opacity: 0.8
+                },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    borderRadius: '0rem', // Optional: go from rounded to square (skip if you want rounded to stay)
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: '.s5-image-wrapper',
+                        start: 'top 90%',
+                        end: 'center 50%',
+                        scrub: 1 // Link animation directly to scroll position for that professional feel
+                    }
+                }
+            );
+
+            // Subtly scale the actual image inside the wrapper opposite to wrapper scale for parallax feel
+            gsap.fromTo('.s5-image',
+                { scale: 1.2 },
+                {
+                    scale: 1,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.s5-image-wrapper',
+                        start: 'top 90%',
+                        end: 'bottom top',
+                        scrub: true
+                    }
+                }
+            );
+        }
+
+        // 3. Bottom portal text entrance
+        const bottomTextElements = section5.querySelectorAll('.s5-subheading, .s5-portal-cta');
+        if (bottomTextElements.length > 0) {
+            gsap.fromTo(bottomTextElements,
+                { y: 40, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    stagger: 0.15,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '.s5-portal-content',
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        }
+    }
+
+    // ===== SECTION 6: Site Survey — Premium Scroll Animations =====
+    const section6 = document.getElementById('section6-survey');
+
+    if (section6) {
+        const s6Tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section6,
+                start: 'top 75%',
+                end: 'top 25%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        // 1. Eyebrow fades up
+        s6Tl.to('.s6-eyebrow', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out'
+        }, 0);
+
+        // 2. Title words stagger up (each word individually)
+        s6Tl.to('.s6-title-word', {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: 'power3.out'
+        }, 0.15);
+
+        // 3. Divider line draws from left to right
+        s6Tl.to('.s6-divider', {
+            width: '100%',
+            duration: 1.1,
+            ease: 'power2.inOut'
+        }, 0.55);
+
+        // 4. Orange quote fades up
+        s6Tl.to('.s6-quote', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out'
+        }, 0.75);
+
+        // 5. Sub text fades up
+        s6Tl.to('.s6-sub', {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power3.out'
+        }, 0.9);
+
+        // 6. Form card scales in from slight reduction
+        s6Tl.to('.s6-form-card', {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 1.0,
+            ease: 'power3.out'
+        }, 0.25);
+    }
+
+    // ===== SECTION 7: Moving Stability Forward — Word Scale + Image Reveal =====
+    const section7 = document.getElementById('section7-mobility');
+
+    if (section7 && window.innerWidth > 768) {
+
+        const s7ImageWrap = section7.querySelector('.s7-image-wrap');
+        const s7Lines = section7.querySelectorAll('.s7-line');
+        const s7Taglines = section7.querySelector('.s7-taglines');
+
+        // Scrubbed timeline — pin the sticky wrap, play + reverse with scroll
+        const s7Tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section7,
+                start: 'top top',
+                end: '+=300%',
+                scrub: 1,          // smooth scrub — reverses perfectly on scroll up
+                pin: '.s7-sticky-wrap',
+                pinSpacing: false,
+                anticipatePin: 1
+            }
+        });
+
+        // ── PHASE 1: Words scale up + fade in (0.0 → 1.5) ──
+        s7Lines.forEach(function (line, i) {
+            s7Tl.to(line, {
+                fontSize: 'clamp(5rem, 9vw, 11rem)',
+                opacity: 1,
+                ease: 'power2.out',
+                duration: 1.5
+            }, i * 0.1);
+        });
+
+        // ── PHASE 2: Image starts reveal + expands to 60% (0.5 → 1.5) ──
+        // This starts while words are still scaling
+        s7Tl.to(s7ImageWrap, {
+            width: '60%',
+            height: '65vh',
+            opacity: 1,
+            borderRadius: '2rem',
+            ease: 'power2.inOut',
+            duration: 1.0
+        }, 0.5);
+
+        // ── PHASE 3: Words fade out decisively (1.5 → 2.2) ──
+        // Start fading exactly as Phase 1 finishes
+        s7Tl.to(s7Lines, {
+            opacity: 0,
+            ease: 'power2.in',
+            duration: 0.7,
+            stagger: 0
+        }, 1.5);
+
+        // ── PHASE 4: Image continues to final 80% size (1.5 → 3.0) ──
+        s7Tl.to(s7ImageWrap, {
+            width: '80%',
+            height: '82vh',
+            borderRadius: '2.4rem',
+            ease: 'power2.out',
+            duration: 1.5
+        }, 1.5);
+    }
+
+    // ===== SECTION 9: Mission & Team Animations =====
+    const section9 = document.getElementById('section9-mission');
+    if (section9) {
+        const s9Tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section9,
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+
+        s9Tl.fromTo('.s9-main-title',
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }
+        )
+            .fromTo('.s9-card',
+                { y: 60, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out' },
+                '-=0.6'
+            );
+    }
+
+    // ===== SECTION 8: Get Up to Speed (Card Grid) =====
+    const section8 = document.getElementById('section8-news');
+
+    if (section8) {
+        if (window.innerWidth > 768) {
+            // Desktop: Cards slide in from the left with a slight rotation (Premium feel)
+            gsap.fromTo('.s8-card',
+                {
+                    x: -100,
+                    opacity: 0,
+                    rotationY: -15, // Slight 3D rotation for a cool effect
+                    transformPerspective: 1000
+                },
+                {
+                    x: 0,
+                    opacity: 1,
+                    rotationY: 0,
+                    duration: 1.2,
+                    stagger: 0.15, // Each card follows the previous one
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: section8,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse' // Animates back when scrolling up
+                    }
+                }
+            );
+        } else {
+            // Mobile: Standard slide up from bottom to prevent horizontal scrolling issues
+            gsap.fromTo('.s8-card',
+                {
+                    y: 60,
+                    opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: section8,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        }
+    }
+
+    // ==== Footer Animations ====
+    const footerTop = document.querySelector('.footer-top');
+    if (footerTop) {
+        gsap.to('.footer-column', {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.footer-section',
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+
+        gsap.to('.footer-links-left a', {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.footer-bottom-links',
+                start: 'top 95%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+
+        gsap.to('.footer-branding', {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.footer-image',
+                start: 'top 75%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+
+        // Footer Image Parallax
+        const footerImageWrapper = document.querySelector('.footer-image-wrapper');
+        if (footerImageWrapper) {
+            gsap.to(footerImageWrapper, {
+                yPercent: -20,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.footer-image',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+        }
+    }
+
 });
+
+
