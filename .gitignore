@@ -13,8 +13,12 @@
 # Allow essential assets
 !video_of_360.mp4
 !img_1.png
-!sec 4 image.png
+!sec_4_image.png
 !e01c6d5a26dac546cc06e775dab738a3.png
+!ss_1.png
+!ss2.png
+!ss3.png
+!section-7-bg.jpg
 
 # Allow Section 4 images folder and its contents
 !images sec 4]]/
