@@ -524,77 +524,154 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ===== SECTION 6: Site Survey — Premium Scroll Animations =====
+    // ===== SECTION 6: Site Survey — Scroll-scrubbed Entrance (both mobile + desktop) =====
     const section6 = document.getElementById('section6-survey');
 
     if (section6) {
-        const s6Tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: section6,
-                start: 'top 75%',
-                end: 'top 25%',
-                toggleActions: 'play none none none'
+        const isDesktop = window.innerWidth > 768;
+
+        if (isDesktop) {
+            // ── DESKTOP: 3D AR/VR entrance — scrubbed bidirectionally ──
+
+            // Text side: slides from left with depth (rewinds on scroll up)
+            gsap.fromTo('.s6-text-side',
+                { x: -80, opacity: 0, rotateY: -10, transformPerspective: 1200 },
+                {
+                    x: 0, opacity: 1, rotateY: 0, ease: 'none',
+                    scrollTrigger: {
+                        trigger: section6,
+                        start: 'top 85%',
+                        end: 'top 30%',
+                        scrub: true
+                    }
+                }
+            );
+
+            // Form card: 3D panel rotates in (rewinds on scroll up)
+            gsap.fromTo('.s6-form-card',
+                { opacity: 0, rotateY: 18, x: 60, y: 40, scale: 0.9, transformPerspective: 1000 },
+                {
+                    opacity: 1, rotateY: 0, x: 0, y: 0, scale: 1, ease: 'none',
+                    scrollTrigger: {
+                        trigger: section6,
+                        start: 'top 80%',
+                        end: 'top 20%',
+                        scrub: true
+                    }
+                }
+            );
+
+            // Text stagger timeline — scrubbed (rewinds on scroll up)
+            const s6TlD = gsap.timeline({
+                scrollTrigger: { trigger: section6, start: 'top 85%', end: 'top 25%', scrub: true }
+            });
+            s6TlD
+                .to('.s6-eyebrow', { opacity: 1, y: 0 }, 0)
+                .to('.s6-title-word', { opacity: 1, y: 0, stagger: 0.1 }, 0.1)
+                .to('.s6-divider', { width: '100%' }, 0.45)
+                .to('.s6-quote', { opacity: 1, y: 0 }, 0.65)
+                .to('.s6-sub', { opacity: 1, y: 0 }, 0.8);
+
+            // Form fields stagger in — scrubbed
+            const inputsD = document.querySelectorAll('#section6-survey .s6-input-anim');
+            if (inputsD.length > 0) {
+                gsap.fromTo(inputsD,
+                    { opacity: 0, y: 24 },
+                    {
+                        opacity: 1, y: 0, ease: 'none',
+                        stagger: { each: 0.08, ease: 'none' },
+                        scrollTrigger: {
+                            trigger: '.s6-form-card',
+                            start: 'top 85%',
+                            end: 'top 20%',
+                            scrub: true
+                        }
+                    }
+                );
             }
-        });
 
-        // 1. Eyebrow fades up
-        s6Tl.to('.s6-eyebrow', {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out'
-        }, 0);
+        } else {
+            // ── MOBILE: Clean scrub — NO 3D rotations (fixes the tilt) ──
+            // Force clear any lingering CSS transforms first
+            gsap.set('.s6-form-card', { clearProps: 'transform,opacity' });
+            gsap.set('.s6-text-side', { clearProps: 'transform,opacity' });
+            gsap.set('.s6-eyebrow,.s6-title-word,.s6-sub,.s6-divider', { clearProps: 'all' });
 
-        // 2. Title words stagger up (each word individually)
-        s6Tl.to('.s6-title-word', {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            stagger: 0.12,
-            ease: 'power3.out'
-        }, 0.15);
+            // 1. Text side: slides up from below as you scroll in, slides back down on scroll up
+            gsap.fromTo('.s6-text-side',
+                { y: 50, opacity: 0 },
+                {
+                    y: 0, opacity: 1, ease: 'none',
+                    scrollTrigger: {
+                        trigger: section6,
+                        start: 'top 95%',
+                        end: 'top 40%',
+                        scrub: true
+                    }
+                }
+            );
 
-        // 3. Divider line draws from left to right
-        s6Tl.to('.s6-divider', {
-            width: '100%',
-            duration: 1.1,
-            ease: 'power2.inOut'
-        }, 0.55);
+            // 2. Title + eyebrow + sub text stagger in — scrubbed
+            const s6TlM = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section6,
+                    start: 'top 90%',
+                    end: 'top 25%',
+                    scrub: true
+                }
+            });
+            s6TlM
+                .to('.s6-eyebrow', { opacity: 1, y: 0 }, 0)
+                .to('.s6-title-word', { opacity: 1, y: 0, stagger: 0.08 }, 0.1)
+                .to('.s6-divider', { width: '100%' }, 0.45)
+                .to('.s6-sub', { opacity: 1, y: 0 }, 0.65);
 
-        // 4. Orange quote fades up
-        s6Tl.to('.s6-quote', {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out'
-        }, 0.75);
+            // 3. Form card slides up cleanly — NO rotation, fully straight
+            gsap.fromTo('.s6-form-card',
+                { y: 80, opacity: 0, scale: 0.95 },
+                {
+                    y: 0, opacity: 1, scale: 1, ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.s6-form-side',
+                        start: 'top 95%',
+                        end: 'top 20%',
+                        scrub: true
+                    }
+                }
+            );
 
-        // 5. Sub text fades up
-        s6Tl.to('.s6-sub', {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power3.out'
-        }, 0.9);
-
-        // 6. Form card scales in from slight reduction
-        s6Tl.to('.s6-form-card', {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 1.0,
-            ease: 'power3.out'
-        }, 0.25);
+            // 4. Form fields slide up one by one — scrubbed
+            const inputsM = document.querySelectorAll('#section6-survey .s6-input-anim');
+            if (inputsM.length > 0) {
+                gsap.fromTo(inputsM,
+                    { opacity: 0, y: 28 },
+                    {
+                        opacity: 1, y: 0, ease: 'none',
+                        stagger: { each: 0.07, ease: 'none' },
+                        scrollTrigger: {
+                            trigger: '.s6-form-card',
+                            start: 'top 90%',
+                            end: 'center 35%',
+                            scrub: true
+                        }
+                    }
+                );
+            }
+        }
     }
+
 
     // ===== SECTION 7: Moving Stability Forward — Word Scale + Image Reveal =====
     const section7 = document.getElementById('section7-mobility');
 
-    if (section7 && window.innerWidth > 768) {
+    if (section7) {
 
         const s7ImageWrap = section7.querySelector('.s7-image-wrap');
         const s7Lines = section7.querySelectorAll('.s7-line');
         const s7Taglines = section7.querySelector('.s7-taglines');
+        const s7ScrollIndicator = section7.querySelector('.s7-scroll-indicator');
+
+        const isMobile = window.innerWidth <= 768;
 
         // Scrubbed timeline — pin the sticky wrap, play + reverse with scroll
         const s7Tl = gsap.timeline({
@@ -609,44 +686,127 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // ── PHASE 1: Words scale up + fade in (0.0 → 1.5) ──
+        // ── PHASE 0: Fade out scroll indicator on mobile (0.0 → 0.2) ──
+        if (s7ScrollIndicator) {
+            s7Tl.to(s7ScrollIndicator, {
+                opacity: 0,
+                autoAlpha: 0,
+                ease: 'power2.out',
+                duration: 0.2
+            }, 0.0);
+        }
+
+        // ── PHASE 1: Words scale up + fade in (0.0 → 1.0) ──
         s7Lines.forEach(function (line, i) {
             s7Tl.to(line, {
                 fontSize: 'clamp(5rem, 9vw, 11rem)',
                 opacity: 1,
                 ease: 'power2.out',
-                duration: 1.5
+                duration: 1.0
             }, i * 0.1);
         });
 
-        // ── PHASE 2: Image starts reveal + expands to 60% (0.5 → 1.5) ──
-        // This starts while words are still scaling
+        // ── PHASE 2: Image starts reveal + expands (0.0 → 1.0) ──
+        // This starts EXACTLY at the same time as words scaling
         s7Tl.to(s7ImageWrap, {
-            width: '60%',
-            height: '65vh',
+            width: isMobile ? '85%' : '60%',
+            height: isMobile ? '40vh' : '65vh',
             opacity: 1,
             borderRadius: '2rem',
             ease: 'power2.inOut',
             duration: 1.0
-        }, 0.5);
+        }, 0.0);
 
-        // ── PHASE 3: Words fade out decisively (1.5 → 2.2) ──
-        // Start fading exactly as Phase 1 finishes
+        // ── PHASE 3: Words fade out VERY early on (0.2 → 0.6) ──
         s7Tl.to(s7Lines, {
             opacity: 0,
-            ease: 'power2.in',
-            duration: 0.7,
+            autoAlpha: 0, // ensure they hide completely
+            ease: 'power4.out',
+            duration: 0.4,
             stagger: 0
-        }, 1.5);
+        }, 0.2);
 
-        // ── PHASE 4: Image continues to final 80% size (1.5 → 3.0) ──
+        // ── PHASE 4: Image continues to final size (1.0 → 2.5) ──
         s7Tl.to(s7ImageWrap, {
-            width: '80%',
-            height: '82vh',
-            borderRadius: '2.4rem',
+            width: isMobile ? '92%' : '80%',
+            height: isMobile ? '55vh' : '82vh',
+            borderRadius: isMobile ? '2.8rem' : '2.4rem',
             ease: 'power2.out',
             duration: 1.5
-        }, 1.5);
+        }, 1.0);
+    }
+
+    // ===== SECTION 7 NEW: 3D Card Image Scroll Animation =====
+    const section7New = document.getElementById('section7-mobility-new');
+    if (section7New) {
+        const s7Cols = section7New.querySelectorAll('.s7-col');
+
+        s7Cols.forEach((col, index) => {
+            const img = col.querySelector('.s7-col-image img');
+            const content = col.querySelector('.s7-col-content');
+            if (!img) return;
+
+            // Left col tilts from left (-30deg), right col tilts from right (+30deg)
+            const fromRotateY = index === 0 ? -30 : 30;
+
+            // 3D image reveal — scrubbed from initial tilt to flat
+            gsap.fromTo(img,
+                {
+                    rotateY: fromRotateY,
+                    rotateX: 8,
+                    scale: 0.88,
+                    opacity: 0,
+                    transformPerspective: 900
+                },
+                {
+                    rotateY: 0,
+                    rotateX: 0,
+                    scale: 1,
+                    opacity: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: col,
+                        start: 'top 85%',
+                        end: 'top 30%',
+                        scrub: 1.2
+                    }
+                }
+            );
+
+            // Content text slides up simultaneously
+            if (content) {
+                gsap.fromTo(content,
+                    { y: 40, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: col,
+                            start: 'top 80%',
+                            end: 'top 40%',
+                            scrub: 1
+                        }
+                    }
+                );
+            }
+        });
+
+        // Hero heading fade in from below — play once, stay visible
+        gsap.set('#section7-mobility-new .s7-hero-heading', { opacity: 0, y: 50 });
+        gsap.to('#section7-mobility-new .s7-hero-heading',
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '#section7-mobility-new .s7-hero-wrap',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
     }
 
     // ===== SECTION 9: Mission & Team Animations =====
@@ -675,42 +835,66 @@ document.addEventListener('DOMContentLoaded', () => {
     const section8 = document.getElementById('section8-news');
 
     if (section8) {
-        if (window.innerWidth > 768) {
-            // Desktop: Cards slide in from the left with a slight rotation (Premium feel)
-            gsap.fromTo('.s8-card',
-                {
-                    x: -100,
-                    opacity: 0,
-                    rotationY: -15, // Slight 3D rotation for a cool effect
-                    transformPerspective: 1000
-                },
-                {
-                    x: 0,
-                    opacity: 1,
-                    rotationY: 0,
-                    duration: 1.2,
-                    stagger: 0.15, // Each card follows the previous one
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: section8,
-                        start: 'top 80%',
-                        toggleActions: 'play none none reverse' // Animates back when scrolling up
-                    }
+        // Animate the title with 3D effect
+        gsap.fromTo('.s8-title',
+            {
+                y: 80,
+                opacity: 0,
+                rotationX: -25,
+                transformPerspective: 1000
+            },
+            {
+                y: 0,
+                opacity: 1,
+                rotationX: 0,
+                scrollTrigger: {
+                    trigger: section8,
+                    start: 'top 85%',
+                    end: 'top 30%',
+                    scrub: true
                 }
-            );
-        } else {
-            // Mobile: Standard slide up from bottom to prevent horizontal scrolling issues
+            }
+        );
+
+        if (window.innerWidth > 768) {
+            // Desktop: Cards slide up with 3D rotation, scrubbed on scroll
             gsap.fromTo('.s8-card',
                 {
-                    y: 60,
-                    opacity: 0
+                    y: 150,
+                    opacity: 0,
+                    rotationX: -20,
+                    transformPerspective: 1000
                 },
                 {
                     y: 0,
                     opacity: 1,
+                    rotationX: 0,
+                    stagger: { each: 0.1, ease: 'none' },
+                    scrollTrigger: {
+                        trigger: section8,
+                        start: 'top 85%',
+                        end: 'center 45%',
+                        scrub: true
+                    }
+                }
+            );
+        } else {
+            // Mobile: 3D slide from left, triggered on scroll
+            gsap.fromTo('.s8-card',
+                {
+                    x: -100,
+                    y: 40,
+                    opacity: 0,
+                    rotationX: -15,
+                    transformPerspective: 1000
+                },
+                {
+                    x: 0,
+                    y: 0,
+                    opacity: 1,
+                    rotationX: 0,
                     duration: 0.8,
                     stagger: 0.15,
-                    ease: 'power3.out',
                     scrollTrigger: {
                         trigger: section8,
                         start: 'top 85%',
@@ -719,6 +903,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             );
         }
+    }
+
+    // ===== MOBILE FEATURED IN (Press Section) =====
+    const pressSection = document.querySelector('.press-section');
+    if (pressSection && window.innerWidth <= 768) {
+        gsap.fromTo('.press-heading',
+            {
+                y: 60,
+                opacity: 0,
+                rotationX: -25,
+                transformPerspective: 1000
+            },
+            {
+                y: 0,
+                opacity: 1,
+                rotationX: 0,
+                scrollTrigger: {
+                    trigger: pressSection,
+                    start: 'top 90%',
+                    end: 'top 30%',
+                    scrub: true
+                }
+            }
+        );
+
+        gsap.fromTo('.press-item',
+            {
+                x: -100,
+                y: 40,
+                opacity: 0,
+                rotationX: -15,
+                transformPerspective: 1000
+            },
+            {
+                x: 0,
+                y: 0,
+                opacity: 1,
+                rotationX: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                scrollTrigger: {
+                    trigger: pressSection,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
     }
 
     // ==== Footer Animations ====
@@ -781,3 +1012,133 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ===== SECTION 7 NEW: Two Column Layout animations =====
+    const section7new2 = document.getElementById('section7-mobility-new');
+    if (section7new2) {
+        // Heading & eyebrow — play once, stay visible (do NOT reverse)
+        gsap.from('.s7-hero-heading, .s7-eyebrow', {
+            scrollTrigger: {
+                trigger: '#section7-mobility-new',
+                start: 'top 80%',
+                toggleActions: 'play none none none'   // ← never reverses
+            },
+            y: 40,
+            opacity: 0,
+            duration: 1.0,
+            stagger: 0.15,
+            ease: 'power3.out'
+        });
+
+        // Columns — also play once, stay visible
+        gsap.from('.s7-col', {
+            scrollTrigger: {
+                trigger: '.s7-two-col',
+                start: 'top 80%',
+                toggleActions: 'play none none none'   // ← never reverses
+            },
+            y: 60,
+            opacity: 0,
+            duration: 1.0,
+            stagger: 0.2,
+            ease: 'power3.out'
+        });
+    }
+});
+
+// ===== SECTION 9: 3D Parallax Layers — Smooth Lerp Edition =====
+(function () {
+    var cards = [
+        document.querySelector('#s9card1'),
+        document.querySelector('#s9card2'),
+        document.querySelector('#s9card3'),
+        document.querySelector('#s9card4'),
+        document.querySelector('#s9card5')
+    ];
+
+    if (!cards[0]) return;
+
+    // ── Layer config: depth offset & translation multiplier ──
+    var layerCfg = [
+        { txBase: 0, tyBase: 0, txMult: 1, tyMult: 1 },
+        { txBase: -2, tyBase: -0.5, txMult: 8, tyMult: 8 },
+        { txBase: -4, tyBase: -1, txMult: 16, tyMult: 16 },
+        { txBase: -6, tyBase: -1.5, txMult: 24, tyMult: 24 },
+        { txBase: -8, tyBase: -2, txMult: 32, tyMult: 32 }
+    ];
+
+    var halfW = window.innerWidth / 2;
+    var halfH = window.innerHeight / 2;
+
+    // Target values (set by input events)
+    var targetRX = 0.14;
+    var targetRY = -0.03;
+
+    // Current interpolated values (updated each rAF tick)
+    var currentRX = 0.14;
+    var currentRY = -0.03;
+
+    // Lerp speed: 0.06 = very smooth/laggy, 0.12 = responsive but still smooth
+    var LERP = 0.08;
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function setLayers(rx, ry) {
+        var tiltBase = 'rotateY(' + (rx * 6) + 'deg) rotateX(' + (ry * 4) + 'deg)';
+        for (var i = 0; i < cards.length; i++) {
+            if (!cards[i]) continue;
+            var cfg = layerCfg[i];
+            var tx = -(rx * cfg.txMult) + cfg.txBase;
+            var ty = (ry * cfg.tyMult) + cfg.tyBase;
+            cards[i].style.transform = tiltBase + ' translate(' + tx + '%,' + ty + '%)';
+        }
+    }
+
+    // ── rAF loop: smoothly lerp current → target each frame ──
+    function tick() {
+        currentRX = lerp(currentRX, targetRX, LERP);
+        currentRY = lerp(currentRY, targetRY, LERP);
+        setLayers(currentRX, currentRY);
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // ── Desktop: mouse move ──
+    document.addEventListener('mousemove', function (e) {
+        targetRX = e.clientX < halfW ? -(1 - (e.clientX / halfW)) : (1 - (halfW / e.clientX)) * 2;
+        targetRY = e.clientY < halfH ? (1 - (e.clientY / halfH)) : -(1 - (halfH / e.clientY)) * 2;
+    });
+
+    // Reset gently on mouse leave
+    document.addEventListener('mouseleave', function () {
+        targetRX = 0.14;
+        targetRY = -0.03;
+    });
+
+    // ── Mobile: touch move ──
+    document.addEventListener('touchmove', function (e) {
+        var touch = e.touches[0];
+        targetRX = touch.clientX < halfW ? -(1 - (touch.clientX / halfW)) : (1 - (halfW / touch.clientX)) * 2;
+        targetRY = touch.clientY < halfH ? (1 - (touch.clientY / halfH)) : -(1 - (halfH / touch.clientY)) * 2;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function () {
+        targetRX = 0.14;
+        targetRY = -0.03;
+    });
+
+    // ── Mobile: gyroscope ──
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', function (e) {
+            if (e.gamma !== null) targetRX = Math.max(-1, Math.min(1, e.gamma / 25));
+            if (e.beta !== null) targetRY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
+        }, { passive: true });
+    }
+
+    window.addEventListener('resize', function () {
+        halfW = window.innerWidth / 2;
+        halfH = window.innerHeight / 2;
+    });
+})();
