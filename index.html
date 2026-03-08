@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoox - Hero Replica</title>
+    <title>360D.AI</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="2f1823c4febb0d78.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -474,13 +474,15 @@
                 height: auto !important;
                 min-height: 0 !important;
                 border-radius: 0 !important;
-                padding: 6rem 2rem 6rem !important;
-                background-color: #ffffff !important;
+                padding: 4rem 1rem 0 !important;
+                background-color: transparent !important;
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
                 text-align: center !important;
-                gap: 1.4rem !important;
+                margin-top: 2rem !important;
+                margin-bottom: 0 !important;
+                gap: 0 !important;
             }
 
             /* Hide word list on mobile, show the single paragraph instead */
@@ -490,14 +492,15 @@
 
             #section4-crossfade .s4-mobile-para {
                 display: block !important;
-                font-size: 2.8rem !important;
-                /* large, bold, black like Zoox mobile text */
-                font-weight: 600 !important;
+                font-family: __gtStandardL_53dfc7, __gtStandardL_Fallback_53dfc7, system-ui, helvetica, arial, sans-serif, 'Geist Sans', sans-serif !important;
+                font-size: 2.1rem !important;
+                font-weight: 500 !important;
+                line-height: 1.35 !important;
                 color: #1d1d1f !important;
-                letter-spacing: -0.02em !important;
-                line-height: 1.1 !important;
                 text-align: center !important;
-                margin: 0.4rem 0 2rem 0 !important;
+                margin-top: 0 !important;
+                margin-bottom: 2rem !important;
+                letter-spacing: -0.01em !important;
             }
 
             /* All crossfade words hidden except active */
@@ -508,14 +511,25 @@
             /* Active word: big centered headline */
             #section4-crossfade .crossfade-text.active {
                 display: block !important;
-                font-size: 3.2rem !important;
-                font-weight: 700 !important;
+                font-family: __gtStandardL_53dfc7, __gtStandardL_Fallback_53dfc7, system-ui, helvetica, arial, sans-serif, 'Geist Sans', sans-serif !important;
+                font-size: 2.1rem !important;
+                font-weight: 500 !important;
+                line-height: 1.35 !important;
                 color: #1d1d1f !important;
-                letter-spacing: -0.02em !important;
-                line-height: 1.1 !important;
                 text-align: center !important;
+                letter-spacing: -0.01em !important;
+                margin-top: 0 !important;
+                margin-bottom: 2rem !important;
                 transition: opacity 0.6s ease !important;
             }
+
+            #section4-crossfade .Section3_btn {
+                padding: 1.2rem 2.6rem !important;
+                font-size: 1.1rem !important;
+                margin-bottom: 4rem !important;
+                margin-top: 0 !important;
+            }
+
 
             /* Card wrap: full-width container, relative for overlay */
             #section4-crossfade .s4-card-wrap {
@@ -600,6 +614,33 @@
                 width: 100% !important;
             }
         }
+
+        /* --- Unify Section 5 CTA Mobile/Desktop style (Blue background, white text) --- */
+        #section5-feature .s5-cta {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 1rem !important;
+            background-color: #0071e3 !important;
+            /* Standard Apple blue to match the Apple-style section */
+            color: #ffffff !important;
+            border: none !important;
+            padding: 1rem 2rem !important;
+            border-radius: 4rem !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.05em !important;
+            text-transform: uppercase !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3) !important;
+        }
+
+        #section5-feature .s5-cta:hover {
+            background-color: #0077ED !important;
+            transform: scale(1.05) !important;
+            box-shadow: 0 6px 16px rgba(0, 113, 227, 0.4) !important;
+        }
     </style>
 </head>
 
@@ -653,7 +694,7 @@
                                         stroke-linejoin="round" stroke-width="1.5"
                                         d="m1 9 2.384-2.384a2.286 2.286 0 0 0 0-3.232L1 1"></path>
                                 </svg><a class="NavLink_button__KPSEo" tabindex="0" aria-current="false"
-                                    href="/how-it-works/">How It Works</a>
+                                    href="coming-soon.html">How It Works</a>
                             </div>
                         </div>
                         <div>
@@ -665,12 +706,13 @@
                                         stroke-linejoin="round" stroke-width="1.5"
                                         d="m1 9 2.384-2.384a2.286 2.286 0 0 0 0-3.232L1 1"></path>
                                 </svg><a class="NavLink_button__KPSEo" tabindex="0" aria-current="false"
-                                    href="/where-we-deploy/">Where We Deploy</a>
+                                    href="coming-soon.html">Where We Deploy</a>
                             </div>
                         </div>
                     </li>
                     <li id="nav-logo-li" style="margin: 0 2rem;">
-                        <a class="Nav_logo__4UQaP" tabindex="0" aria-label="360D Homepage" href="/"
+                        <a class="Nav_logo__4UQaP" tabindex="0" aria-label="360D Homepage" href="index.html"
+                            onclick="window.location.href='index.html'; return false;"
                             style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px); text-decoration: none; color: currentColor; display: flex; align-items: center; justify-content: center;">
                             <img src="assets/e01c6d5a26dac546cc06e775dab738a3.png" alt="360D.AI Logo"
                                 style="height: 100%; max-height: 50px; width: auto; object-fit: contain;">
@@ -686,7 +728,7 @@
                                         stroke-linejoin="round" stroke-width="1.5"
                                         d="m1 9 2.384-2.384a2.286 2.286 0 0 0 0-3.232L1 1"></path>
                                 </svg><a class="NavLink_button__KPSEo" tabindex="0" aria-current="false"
-                                    href="/know-the-system/">Know the System</a>
+                                    href="#section6-survey">Know the System</a>
                             </div>
                         </div>
                         <div>
@@ -698,13 +740,13 @@
                                         stroke-linejoin="round" stroke-width="1.5"
                                         d="m1 9 2.384-2.384a2.286 2.286 0 0 0 0-3.232L1 1"></path>
                                 </svg><a class="NavLink_button__KPSEo" tabindex="0" aria-current="false"
-                                    href="/support/">Support</a>
+                                    href="https://www.linkedin.com/showcase/360d-ai/" target="_blank">Support</a>
                             </div>
                         </div>
                     </li>
                 </ul><a tabindex="0"
                     class="Cta Cta_root__5_ARo Cta_secondary__Rtbqw Cta_light__2i6S_ Nav_newsletterBtn__il7q7"
-                    href="/app/">
+                    href="coming-soon.html">
                     <div class="Cta_wrapper__Kma84">
                         <div class="Cta_iconContainer__B9af6 Cta_arrowLeft__lnqE4"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10"
@@ -770,7 +812,8 @@
             <nav class="menu-nav" aria-label="Full menu">
                 <ul class="menu-list">
                     <li>
-                        <a href="#how-it-works" class="menu-link">
+                        <a href="coming-soon.html" class="menu-link"
+                            onclick="window.location.href='coming-soon.html'; return false;">
                             <span>How It Works</span>
                             <div class="menu-arrow-circle">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10">
@@ -794,7 +837,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#know-the-system" class="menu-link">
+                        <a href="#section6-survey" class="menu-link">
                             <span>Know the System</span>
                             <div class="menu-arrow-circle">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10">
@@ -806,7 +849,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#support" class="menu-link">
+                        <a href="https://www.linkedin.com/showcase/360d-ai/" class="menu-link" target="_blank"
+                            onclick="window.open('https://www.linkedin.com/showcase/360d-ai/', '_blank'); return false;">
                             <span>Support</span>
                             <div class="menu-arrow-circle">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10">
@@ -1013,7 +1057,8 @@
                         <span class="crossfade-text">Emergency Response</span>
                         <span class="crossfade-text">Community Command</span>
                     </div>
-                    <p class="s4-mobile-para" style="display: none;">Coordinated support when it matters most.</p>
+                    <p class="s4-mobile-para" style="display: none;">Coordinated support when it matters most, ensuring
+                        smooth collaboration and quick responses.</p>
                     <a href="#" class="Section3_btn" id="section4-btn">
                         THE 360D.AI EXPERIENCE
                         <svg width="6" height="10" viewBox="0 0 5 10" fill="none" stroke="currentColor"
@@ -1027,13 +1072,12 @@
                 <div class="s4-card-wrap">
                     <div class="Section3_mediaCard">
                         <!-- Overlapping images for crossfade -->
-                        <img class="crossfade-img active"
-                            src="assets/Gemini_Generated_Image_4ryrnl4ryrnl4ryr.png" alt="Care Hub">
+                        <img class="crossfade-img active" src="assets/Gemini_Generated_Image_4ryrnl4ryrnl4ryr.png"
+                            alt="Care Hub">
                         <img class="crossfade-img" src="assets/Calm_Space.png" alt="Calm Space">
                         <img class="crossfade-img" src="assets/ReEntry_Ready.png" alt="Reentry Ready">
                         <img class="crossfade-img" src="assets/Emergency_Response.png" alt="Emergency Response">
-                        <img class="crossfade-img" src="assets/Family_and_Community_Ready.png"
-                            alt="Community Command">
+                        <img class="crossfade-img" src="assets/Family_and_Community_Ready.png" alt="Community Command">
                     </div>
 
                     <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
@@ -1055,7 +1099,7 @@
             <!-- Top heading area -->
             <div class="s5-text-top" style="padding-top: 12rem; padding-bottom: 5rem;">
                 <p class="s5-eyebrow">The future of stabilized living</p>
-                <p class="s5-subpara">Intelligent automation<br>Interoperable systems<br>Trusted infrastructure</p>
+                <p class="s5-subpara">Intelligent Automation<br>Interoperable Systems<br>Trusted Infrastructure</p>
             </div>
 
             <!-- Full-width image with overlaid portal content -->
@@ -1087,34 +1131,107 @@
 
             <!-- Left: Text content -->
             <div class="s6-text-side">
-                <p class="s6-eyebrow">Fill out the site survey to explore a Deployment</p>
+                <p class="s6-eyebrow">Site Survey</p>
 
-                <h2 class="s6-title">
-                    <span class="s6-title-word">GET</span>
-                    <span class="s6-title-word">MORE</span>
-                    <span class="s6-title-word">INFORMATION</span>
+                <h2 class="s6-title" style="font-size: clamp(3rem, 5vw, 6rem);">
+                    <span class="s6-title-word">"What If</span>
+                    <span class="s6-title-word">Health Care</span>
+                    <span class="s6-title-word">Went Everywhere</span>
+                    <span class="s6-title-word">With You?"</span>
                 </h2>
 
                 <div class="s6-divider-wrap">
                     <div class="s6-divider"></div>
                 </div>
 
-                <blockquote class="s6-quote">
-                    "What If Health Care Went Everywhere With You?"
-                </blockquote>
-
+                <p class="s6-sub" style="margin-bottom: 2rem;">
+                    Fill out the site survey to explore a Deployment and "What If Health Care Went Everywhere With You?"
+                </p>
                 <p class="s6-sub">
-                    360D.AI brings care, coordination, and community infrastructure directly to where people live —
-                    on-site, always available.
+                    Imagine care, safety, and health that aren't tied to a place, but consistently supported across
+                    environments. There are no right or wrong answers here. We're gathering perspectives on what matters
+                    most.
                 </p>
             </div>
 
-            <!-- Right: Embedded JotForm -->
+            <!-- Right: Custom HTML Form -->
             <div class="s6-form-side">
-                <div class="s6-form-card">
-                    <iframe src="https://form.jotform.com/260195498958073" title="360D.AI Site Survey" allowfullscreen
-                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms" loading="lazy">
-                    </iframe>
+                <div class="s6-form-card s6-custom-card">
+                    <form class="s6-custom-form" onsubmit="event.preventDefault();">
+                        <div class="s6-form-row">
+                            <div class="s6-form-group s6-input-anim">
+                                <input type="text" id="s6-fname" name="fname" required placeholder=" ">
+                                <label for="s6-fname">First Name</label>
+                            </div>
+                            <div class="s6-form-group s6-input-anim">
+                                <input type="text" id="s6-lname" name="lname" required placeholder=" ">
+                                <label for="s6-lname">Last Name</label>
+                            </div>
+                        </div>
+
+                        <div class="s6-form-group s6-input-anim">
+                            <input type="email" id="s6-email" name="email" required placeholder=" ">
+                            <label for="s6-email">Email</label>
+                        </div>
+
+                        <div class="s6-form-group s6-input-anim">
+                            <select id="s6-role" name="role" required>
+                                <option value="" disabled selected hidden>Role</option>
+                                <option value="healthcare-provider">Healthcare Provider</option>
+                                <option value="healthcare-professional">Other Healthcare Professional</option>
+                                <option value="government-executive">Government Executive</option>
+                                <option value="community-member">Community Member</option>
+                            </select>
+                        </div>
+
+                        <div class="s6-form-group s6-input-anim">
+                            <textarea id="s6-q1" name="q1" rows="3" required placeholder=" "></textarea>
+                            <label for="s6-q1" class="s6-long-label">What should travel with you if health care could
+                                move with you automatically?</label>
+                        </div>
+
+                        <div class="s6-form-group s6-input-anim">
+                            <select id="s6-q2" name="q2" required>
+                                <option value="" disabled selected hidden>Where should this kind of support activate
+                                    first?</option>
+                                <option value="community-spaces">Community spaces</option>
+                                <option value="clinics">Clinics and care hubs</option>
+                                <option value="schools">Schools</option>
+                                <option value="workplaces">Workplaces</option>
+                                <option value="transitional">Transitional environments</option>
+                            </select>
+                        </div>
+
+                        <div class="s6-form-group s6-input-anim">
+                            <select id="s6-q3" name="q3" required>
+                                <option value="" disabled selected hidden>Who should benefit first from care-aware
+                                    environments?</option>
+                                <option value="seniors">Seniors aging in place</option>
+                                <option value="families">Families with children</option>
+                                <option value="chronic">Individuals with chronic conditions</option>
+                                <option value="returning">Returning citizens</option>
+                                <option value="frontline">Frontline workers</option>
+                                <option value="communities">Entire communities</option>
+                            </select>
+                        </div>
+
+                        <div class="s6-form-group s6-input-anim">
+                            <textarea id="s6-optional" name="optional" rows="3" placeholder=" "></textarea>
+                            <label for="s6-optional" class="s6-long-label">If you'd like, tell us why this matters to
+                                you (Optional)</label>
+                        </div>
+
+                        <div class="s6-form-submit s6-input-anim">
+                            <button type="submit" class="s6-submit-btn">
+                                <span>Submit Survey</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m1 9 2.384-2.384a2.286 2.286 0 0 0 0-3.232L1 1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -1136,6 +1253,12 @@
                     <span class="s7-line" data-line="Forward">Forward</span>
                 </div>
 
+                <!-- Mobile scroll indicator -->
+                <div class="s7-scroll-indicator">
+                    <span>Scroll</span>
+                    <div class="s7-scroll-line"></div>
+                </div>
+
             </div>
         </section>
 
@@ -1146,45 +1269,66 @@
                     <h2 class="s9-main-title">360D.AI is the future</h2>
                 </div>
 
-                <div class="s9-grid">
-                    <!-- Mission Card -->
-                    <div class="s9-card">
-                        <div class="s9-image-wrapper">
-                            <img src="assets/ss_1.png" alt="A Revolution From The Ground Up" class="s9-image">
-                        </div>
-                        <div class="s9-content">
-                            <p class="s9-eyebrow">A REVOLUTION FROM THE GROUND UP</p>
-                            <p class="s9-description">360D.AI is a new form of transportation that will make our streets
-                                safer and less congested.</p>
-                        </div>
-                    </div>
+                <!-- 3D Parallax Card Layer System -->
+                <div class="s9-parallax-scene" id="s9ParallaxScene">
+                    <div class="s9-layer" id="s9card5"></div>
+                    <div class="s9-layer" id="s9card4"></div>
+                    <div class="s9-layer" id="s9card3"></div>
+                    <div class="s9-layer" id="s9card2"></div>
+                    <div class="s9-layer" id="s9card1"></div>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Team Card -->
-                    <div class="s9-card">
-                        <div class="s9-image-wrapper">
-                            <img src="assets/ss2.png" alt="Meet The Team" class="s9-image">
-                        </div>
-                        <div class="s9-content">
-                            <p class="s9-eyebrow">MEET THE TEAM</p>
-                            <p class="s9-description">360D.AI is built by some of the brightest minds in AI,
-                                engineering, computer vision, and more.</p>
-                        </div>
+        <!-- NEW SECTION 7 from user (Mobile Stability / 360D.AI Vision) -->
+        <section id="section7-mobility-new">
+            <div class="s7-hero-wrap">
+                <p class="s7-eyebrow">MOVING MOBILITY FORWARD</p>
+                <h2 class="s7-hero-heading">360D.AI is the future of health-aware spaces: <span
+                        class="s7-highlight">safer, smarter, more connected</span> — and a lot more human.</h2>
+            </div>
+
+            <div class="s7-two-col">
+                <!-- Left Column -->
+                <div class="s7-col">
+                    <div class="s7-col-image">
+                        <img src="assets/Gemini_Generated_Image_4ryrnl4ryrnl4ryr.png" alt="360D.AI in action">
+                    </div>
+                    <div class="s7-col-content">
+                        <p class="s7-col-eyebrow">A REVOLUTION FROM THE GROUND UP</p>
+                        <p class="s7-col-text" style="max-width: 100%;"><span style="white-space: nowrap;">360D.AI is a
+                                new form of care-aware environment</span><br><span style="white-space: nowrap;">that
+                                will make our communities healthier and more connected.</span></p>
+                        <a href="#" class="s7-col-btn">GROUND UP <span>›</span></a>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="s7-col">
+                    <div class="s7-col-image">
+                        <img src="assets/meet_the_team_illustration_1772921588577.png" alt="Meet the team">
+                    </div>
+                    <div class="s7-col-content">
+                        <p class="s7-col-eyebrow">MEET THE TEAM</p>
+                        <p class="s7-col-text">360D.AI is built by some of the brightest minds in AI, healthcare
+                            technology, computer vision, and more.</p>
+                        <a href="#" class="s7-col-btn">MEET THE TEAM <span>›</span></a>
                     </div>
                 </div>
             </div>
         </section>
 
-
         <!-- SECTION 8: Get Up to Speed (Press & Podcasts) -->
         <section id="section8-news">
             <div class="s8-container">
                 <div class="s8-header">
-                    <h2 class="s8-title">Get Up to Speed</h2>
+                    <h2 class="s8-title">Get to know us</h2>
                 </div>
 
                 <div class="s8-grid">
                     <!-- Item 1: Forbes -->
-                    <a href="#" class="s8-card">
+                    <a href="https://www.forbes.com/sites/lisafitzpatrick/2022/01/12/achieving-health-equity-requires-supporting-unseen-black-entrepreneurs/"
+                        class="s8-card" target="_blank">
                         <div class="s8-card-image">
                             <img src="https://360d.ai/_assets/media/f59fab098442251aedf0db303ec2b444.png" alt="Forbes">
                         </div>
@@ -1215,7 +1359,7 @@
                     </a>
 
                     <!-- Item 3: Healthcare Reimagined -->
-                    <a href="#" class="s8-card">
+                    <a href="https://www.youtube.com/watch?v=hQDTLMmgejs" class="s8-card" target="_blank">
                         <div class="s8-card-image">
                             <img src="https://360d.ai/_assets/media/780da541b3b32d812d48bf33d158f5bd.jpg"
                                 alt="Healthcare Reimagined">
@@ -1231,7 +1375,8 @@
                     </a>
 
                     <!-- Item 4: Pay Raise Playbook -->
-                    <a href="#" class="s8-card">
+                    <a href="https://www.jiosaavn.com/shows/how-to-release-your-resistance-to-change-with-jalisa-johnson/E0zjGX5zzzo_"
+                        class="s8-card" target="_blank">
                         <div class="s8-card-image">
                             <img src="https://360d.ai/_assets/media/5fec2d258ea281d9ce2de820a36c5235.png"
                                 alt="Pay Raise Playbook">
@@ -1265,8 +1410,7 @@
                     <a href="https://podcasts.apple.com/us/podcast/saving-space-w-jalisa-johnson/id1653516451?i=1000660791453"
                         target="_blank" rel="noopener noreferrer" class="s8-card s8-card-podcast">
                         <div class="s8-card-image">
-                            <img src="https://360d.ai/_assets/media/aa12bd81634aed898529cfad191cfd0d.png"
-                                alt="Saving Space Podcast">
+                            <img src="assets/540x540bb.webp" alt="Saving Space Podcast">
                             <div class="s8-play-overlay">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M8 5v14l11-7z" />
@@ -1292,16 +1436,17 @@
                 <div class="footer-column segment-site-map">
                     <h3 class="footer-heading">SITE MAP</h3>
                     <ul class="footer-links">
-                        <li><a href="#how-it-works" class="footer-link-with-arrow">How To Ride</a></li>
-                        <li><a href="#where-to-ride" class="footer-link-with-arrow">Where to Ride</a></li>
-                        <li><a href="#know-the-system" class="footer-link-with-arrow">Know Your Ride</a></li>
-                        <li><a href="#support" class="footer-link-with-arrow">Support</a></li>
+                        <li><a href="coming-soon.html" class="footer-link-with-arrow">How It Works</a></li>
+                        <li><a href="coming-soon.html" class="footer-link-with-arrow">Where We Deploy</a></li>
+                        <li><a href="#section6-survey" class="footer-link-with-arrow">Know the System</a></li>
+                        <li><a href="coming-soon.html" class="footer-link-with-arrow">Support</a></li>
                     </ul>
                 </div>
 
                 <!-- Column 2: Logo -->
                 <div class="footer-column segment-logo">
-                    <img src="assets/e01c6d5a26dac546cc06e775dab738a3.png" alt="360D.AI Logo" class="footer-center-logo">
+                    <img src="assets/e01c6d5a26dac546cc06e775dab738a3.png" alt="360D.AI Logo"
+                        class="footer-center-logo">
                 </div>
 
                 <!-- Column 3: Contact Info -->
@@ -1380,12 +1525,12 @@
 
         <div class="footer-image">
             <div class="footer-image-wrapper">
-                <img src="sec 4 image.png" alt="360 Digital Assets">
+                <img src="sec_4_image.png" alt="360 Digital Assets">
             </div>
             <div class="footer-overlay"></div>
             <div class="footer-branding">
                 <div class="footer-logo-bottom">360D.AI</div>
-                <p class="footer-copyright">Copyright 360D.AI, 2024 - All Rights Reserved.</p>
+                <p class="footer-copyright">Copyright 360D.AI, 2026 - All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -1397,7 +1542,8 @@
             <div class="press-container">
                 <h2 class="press-heading">Featured In</h2>
                 <div class="press-grid">
-                    <a href="#" class="press-item" target="_blank">
+                    <a href="https://www.forbes.com/sites/lisafitzpatrick/2022/01/12/achieving-health-equity-requires-supporting-unseen-black-entrepreneurs/"
+                        class="press-item" target="_blank">
                         <div class="press-image">
                             <img src="https://360d.ai/_assets/media/f59fab098442251aedf0db303ec2b444.png"
                                 alt="Forbes Article">
@@ -1411,7 +1557,8 @@
                         </div>
                     </a>
 
-                    <a href="#" class="press-item" target="_blank">
+                    <a href="https://www.arlnow.com/2023/08/28/green-valley-nonprofit-mysecurekid-provides-opportunities-in-it-and-cybersecurity/"
+                        class="press-item" target="_blank">
                         <div class="press-image">
                             <img src="https://360d.ai/_assets/media/a43d0a69fff567c10b554a463af57f7e.jpg"
                                 alt="Arl Now Article">
@@ -1425,7 +1572,7 @@
                         </div>
                     </a>
 
-                    <a href="#" class="press-item" target="_blank">
+                    <a href="https://www.youtube.com/watch?v=hQDTLMmgejs" class="press-item" target="_blank">
                         <div class="press-image">
                             <img src="https://360d.ai/_assets/media/780da541b3b32d812d48bf33d158f5bd.jpg"
                                 alt="Healthcare Reimagined">
@@ -1439,7 +1586,8 @@
                         </div>
                     </a>
 
-                    <a href="#" class="press-item" target="_blank">
+                    <a href="https://www.jiosaavn.com/shows/how-to-release-your-resistance-to-change-with-jalisa-johnson/E0zjGX5zzzo_"
+                        class="press-item" target="_blank">
                         <div class="press-image">
                             <img src="https://360d.ai/_assets/media/5fec2d258ea281d9ce2de820a36c5235.png"
                                 alt="Pay Raise Playbook">
@@ -1453,7 +1601,8 @@
                         </div>
                     </a>
 
-                    <a href="#" class="press-item" target="_blank">
+                    <a href="https://www.facebook.com/GoKineticBiz/videos/covid-was-just-it-took-your-breath-away-jalisa-johnson-ceo-of-virtual-emerging-t/623543175608676/"
+                        class="press-item" target="_blank">
                         <div class="press-image">
                             <img src="https://360d.ai/_assets/media/d7eaa93db93feb52d274b8029d115625.png"
                                 alt="Kinetic Business">
@@ -1467,10 +1616,10 @@
                         </div>
                     </a>
 
-                    <a href="#" class="press-item" target="_blank">
+                    <a href="https://podcasts.apple.com/us/podcast/saving-space-w-jalisa-johnson/id1653516451?i=1000660791453"
+                        class="press-item press-item-podcast" target="_blank">
                         <div class="press-image">
-                            <img src="https://360d.ai/_assets/media/aa12bd81634aed898529cfad191cfd0d.png"
-                                alt="The Devil is a Lie">
+                            <img src="assets/540x540bb.webp" alt="The Devil is a Lie">
                         </div>
                         <div class="press-info">
                             <span class="press-label">Press — The Devil is a Lie</span>
@@ -1491,8 +1640,8 @@
                         <h3 class="footer-heading">SITE MAP</h3>
                         <ul class="footer-links">
                             <li>
-                                <a href="#how-it-works" class="footer-nav-item">
-                                    <span>How To Ride</span>
+                                <a href="coming-soon.html" class="footer-nav-item">
+                                    <span>How It Works</span>
                                     <div class="chevron-circle">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10">
                                             <path fill="transparent" stroke="currentColor" stroke-linecap="round"
@@ -1503,8 +1652,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#where-we-deploy" class="footer-nav-item">
-                                    <span>Where to Ride</span>
+                                <a href="coming-soon.html" class="footer-nav-item">
+                                    <span>Where We Deploy</span>
                                     <div class="chevron-circle">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10">
                                             <path fill="transparent" stroke="currentColor" stroke-linecap="round"
@@ -1515,8 +1664,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#know-the-system" class="footer-nav-item">
-                                    <span>Know Your Ride</span>
+                                <a href="#section6-survey" class="footer-nav-item">
+                                    <span>Know the System</span>
                                     <div class="chevron-circle">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10">
                                             <path fill="transparent" stroke="currentColor" stroke-linecap="round"
@@ -1527,7 +1676,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#support" class="footer-nav-item">
+                                <a href="coming-soon.html" class="footer-nav-item">
                                     <span>Support</span>
                                     <div class="chevron-circle">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10">
@@ -1579,7 +1728,7 @@
                 <div class="footer-branding"
                     style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 40px);">
                     <div class="footer-logo-bottom">360D.AI</div>
-                    <p class="footer-copyright">Copyright 360D.AI, 2024 - All Rights Reserved.</p>
+                    <p class="footer-copyright">Copyright 360D.AI, 2026 - All Rights Reserved.</p>
                 </div>
             </div>
         </footer>
@@ -1590,9 +1739,10 @@
             <span></span>
             <span></span>
         </div>
-        <div class="pill-logo">
+        <a href="index.html" onclick="window.location.href='index.html'; return false;" class="pill-logo"
+            style="text-decoration: none; display: block;">
             <img src="assets/e01c6d5a26dac546cc06e775dab738a3.png" alt="360D.AI Logo">
-        </div>
+        </a>
     </div>
 
     <script src="script.js"></script>
