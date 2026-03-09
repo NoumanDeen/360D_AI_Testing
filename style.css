@@ -15114,7 +15114,37 @@ html,
         display: none !important;
     }
 
-    /* Section 1 Title & Padding */
+    /* =============================================
+       SECTION 1 MOBILE: ENTRANCE ANIMATIONS
+       ============================================= */
+
+    /* Keyframe: text slides up + fades in */
+    @keyframes s1-fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(28px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Keyframe: video scales up + fades in */
+    @keyframes s1-video-in {
+        from {
+            opacity: 0;
+            transform: translateY(20px) scale(0.97);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    /* Section 1 Title & Padding — animate the whole title block */
     .HomepageHeroBespoke_root__z4DvB .HomepageHeroBespoke_title__C_bJm {
         padding-top: 10rem !important;
         padding-bottom: 4rem !important;
@@ -15125,11 +15155,56 @@ html,
         margin: 0 auto !important;
         color: #000000 !important;
         font-family: var(--font-gt-standard-l), system-ui, sans-serif !important;
+        /* Entrance animation */
+        animation: s1-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+        animation-delay: 0.1s !important;
     }
 
+    /* Stagger each word slightly for a flowing effect */
     .HomepageHeroBespoke_title__C_bJm .split-word {
         font-size: 3.2rem !important;
         display: inline !important;
+        animation: s1-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(1) {
+        animation-delay: 0.05s !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(2) {
+        animation-delay: 0.12s !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(3) {
+        animation-delay: 0.19s !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(4) {
+        animation-delay: 0.26s !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(5) {
+        animation-delay: 0.33s !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(6) {
+        animation-delay: 0.40s !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(7) {
+        animation-delay: 0.47s !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(8) {
+        animation-delay: 0.54s !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(9) {
+        animation-delay: 0.61s !important;
+    }
+
+    .HomepageHeroBespoke_title__C_bJm .split-word:nth-child(10) {
+        animation-delay: 0.68s !important;
     }
 
     /* Section 1 Video Wrapper */
@@ -15138,8 +15213,23 @@ html,
         height: 80vh !important;
         margin: 0 auto 4rem !important;
         border-radius: 3.6rem !important;
+        overflow: hidden !important;
         clip-path: inset(0px round 3.6rem) !important;
         -webkit-clip-path: inset(0px round 3.6rem) !important;
+        -webkit-mask-image: -webkit-radial-gradient(white, black) !important;
+        mask-image: -webkit-radial-gradient(white, black) !important;
+        transform: translateZ(0) !important;
+        /* Entrance animation — fires after title words appear */
+        animation: s1-video-in 1s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+        animation-delay: 0.55s !important;
+    }
+
+    /* Force all inner containers to also clip so video doesn't bleed corners */
+    .HomepageHeroBespoke_videoWrapper__clMjH .Media_container__Cws3C,
+    .HomepageHeroBespoke_videoWrapper__clMjH .Media_videoContainer__ID5oo,
+    .HomepageHeroBespoke_videoWrapper__clMjH .BaseVideo_root__D4U1s {
+        border-radius: 3.6rem !important;
+        overflow: hidden !important;
     }
 
     #heroVideoEl {
@@ -15651,7 +15741,7 @@ html,
     .section2-mobile-card {
         background: transparent;
         border-radius: 0;
-        padding: 4rem 1rem 0rem;
+        padding: 6rem 1rem 0rem;
         margin: 0 auto;
         max-width: 600px;
         box-shadow: none;
