@@ -1134,12 +1134,40 @@ document.addEventListener('DOMContentLoaded', () => {
         targetRY = -0.03;
     });
 
-    // ── Mobile: gyroscope ──
+    // ── Mobile: gyroscope (with iOS 13+ permission support) ──
+    function handleOrientation(e) {
+        if (e.gamma !== null) targetRX = Math.max(-1, Math.min(1, e.gamma / 25));
+        if (e.beta !== null) targetRY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
+    }
+
     if (window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', function (e) {
-            if (e.gamma !== null) targetRX = Math.max(-1, Math.min(1, e.gamma / 25));
-            if (e.beta !== null) targetRY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
-        }, { passive: true });
+        // iOS 13+ requires explicit permission triggered by a user action (click/touchstart)
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+            var permissionGranted = false;
+
+            // We listen for the first touch on the document to request permission silently
+            var requestGyro = function () {
+                if (permissionGranted) return;
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            permissionGranted = true;
+                            window.addEventListener('deviceorientation', handleOrientation, { passive: true });
+                        }
+                    })
+                    .catch(console.error); // Ignore errors (e.g. not called from user gesture)
+
+                // Remove listener once we've tried
+                document.removeEventListener('touchstart', requestGyro);
+                document.removeEventListener('click', requestGyro);
+            };
+
+            document.addEventListener('touchstart', requestGyro, { once: true });
+            document.addEventListener('click', requestGyro, { once: true });
+        } else {
+            // Non-iOS 13+ devices (Android, older iOS) don't need permission
+            window.addEventListener('deviceorientation', handleOrientation, { passive: true });
+        }
     }
 
     window.addEventListener('resize', function () {
