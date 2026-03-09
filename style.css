@@ -16209,7 +16209,7 @@ html,
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #4a5d59;
+    color: rgba(255, 255, 255, 0.75);
     margin: 0 0 2.4rem 0;
     /* Initial GSAP state */
     opacity: 0;
@@ -16271,7 +16271,7 @@ html,
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.38);
+    color: rgba(255, 255, 255, 0.75);
     margin: 0;
     max-width: 48ch;
     opacity: 0;
@@ -17875,11 +17875,10 @@ body {
 }
 
 .s7-eyebrow {
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #4a5d59;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #1d1d1f;
+    letter-spacing: 0.02em;
     margin: 10rem 0 1.8em 0;
 }
 
@@ -17963,11 +17962,10 @@ body {
 }
 
 .s7-col-eyebrow {
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 500;
     color: #4a5d59;
+    letter-spacing: 0.02em;
     margin: 0;
 }
 
@@ -18021,9 +18019,10 @@ body {
 
     .s7-eyebrow {
         margin: 0 0 2rem 0;
-        font-size: 1.3rem;
-        /* slightly adjusted for standalone scaling */
-        letter-spacing: 0.22em;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: #4a5d59;
+        letter-spacing: 0.02em;
         text-align: center;
     }
 
