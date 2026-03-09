@@ -825,7 +825,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#where-we-deploy" class="menu-link">
+                        <a href="coming-soon.html" class="menu-link">
                             <span>Where We Deploy</span>
                             <div class="menu-arrow-circle">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 10">
@@ -999,6 +999,7 @@
                 <div class="section2-mobile-card">
                     <p class="section2-mobile-eyebrow">A BETTER WAY TO LIVE</p>
                     <h2 class="section2-mobile-heading">Spend your time on living. Let the system handle the rest.</h2>
+                    <a href="#" class="s2-placeholder-btn">Placeholder</a>
                     <div class="section2-mobile-image">
                         <img src="assets/img_1.png" alt="360D.AI Community">
                     </div>
@@ -1021,6 +1022,8 @@
                                     <div class="split-line" aria-hidden="true" style="text-align: left;">Let the system
                                         handle the rest. </div>
                                     </p>
+                                    <br>
+                                    <a href="#" class="s2-placeholder-btn">Placeholder</a>
                                 </div>
                             </div>
                             <button aria-hidden="true" class="HiddenCta HiddenCta_root__DGcIq" tabindex="0">
@@ -1184,16 +1187,28 @@
                             </select>
                         </div>
 
-                        <div class="s6-form-group s6-input-anim">
-                            <textarea id="s6-q1" name="q1" rows="3" required placeholder=" "></textarea>
-                            <label for="s6-q1" class="s6-long-label">What should travel with you if health care could
-                                move with you automatically?</label>
+                        <div class="s6-form-group s6-input-anim s6-stacked">
+                            <p class="s6-solid-label" id="q1-label">What should travel with you if health care could
+                                move with you automatically?</p>
+                            <div class="s6-standard-checkboxes" aria-labelledby="q1-label">
+                                <label><input type="checkbox" name="q1" value="Emergency readiness"><span>Emergency
+                                        readiness</span></label>
+                                <label><input type="checkbox" name="q1"
+                                        value="Accessibility intelligence"><span>Accessibility
+                                        intelligence</span></label>
+                                <label><input type="checkbox" name="q1" value="Care Coordination Signals"><span>Care
+                                        Coordination Signals</span></label>
+                                <label><input type="checkbox" name="q1" value="Safety and risk thresholds"><span>Safety
+                                        and risk thresholds</span></label>
+                                <label><input type="checkbox" name="q1" value="All of the above"><span>All of the
+                                        above</span></label>
+                            </div>
                         </div>
 
-                        <div class="s6-form-group s6-input-anim">
+                        <div class="s6-form-group s6-input-anim s6-stacked">
+                            <p class="s6-solid-label">Where should this kind of support activate first?</p>
                             <select id="s6-q2" name="q2" required>
-                                <option value="" disabled selected hidden>Where should this kind of support activate
-                                    first?</option>
+                                <option value="" disabled selected hidden>Please Select</option>
                                 <option value="community-spaces">Community spaces</option>
                                 <option value="clinics">Clinics and care hubs</option>
                                 <option value="schools">Schools</option>
@@ -1202,10 +1217,10 @@
                             </select>
                         </div>
 
-                        <div class="s6-form-group s6-input-anim">
+                        <div class="s6-form-group s6-input-anim s6-stacked">
+                            <p class="s6-solid-label">Who should benefit first from care-aware environments?</p>
                             <select id="s6-q3" name="q3" required>
-                                <option value="" disabled selected hidden>Who should benefit first from care-aware
-                                    environments?</option>
+                                <option value="" disabled selected hidden>Please Select</option>
                                 <option value="seniors">Seniors aging in place</option>
                                 <option value="families">Families with children</option>
                                 <option value="chronic">Individuals with chronic conditions</option>
@@ -1215,10 +1230,34 @@
                             </select>
                         </div>
 
-                        <div class="s6-form-group s6-input-anim">
-                            <textarea id="s6-optional" name="optional" rows="3" placeholder=" "></textarea>
-                            <label for="s6-optional" class="s6-long-label">If you'd like, tell us why this matters to
-                                you (Optional)</label>
+                        <div class="s6-form-group s6-input-anim s6-stacked">
+                            <p class="s6-solid-label">What outcome matters most to you?</p>
+                            <select id="s6-q4" name="q4" required>
+                                <option value="" disabled selected hidden>Please Select</option>
+                                <option value="faster">Faster response in critical moments</option>
+                                <option value="fewer">Fewer system failures</option>
+                                <option value="better">Better continuity of care</option>
+                                <option value="lower">Lower overall cost</option>
+                                <option value="dignity">Dignity and personal autonomy</option>
+                            </select>
+                        </div>
+
+                        <div class="s6-form-group s6-input-anim s6-stacked">
+                            <p class="s6-solid-label" id="q5-label">How should this kind of system feel to you?</p>
+                            <div class="s6-standard-checkboxes" aria-labelledby="q5-label">
+                                <label><input type="checkbox" name="q5" value="Invisible"><span>Invisible</span></label>
+                                <label><input type="checkbox" name="q5" value="Automatic"><span>Automatic</span></label>
+                                <label><input type="checkbox" name="q5"
+                                        value="Respectful"><span>Respectful</span></label>
+                                <label><input type="checkbox" name="q5" value="Secure"><span>Secure</span></label>
+                                <label><input type="checkbox" name="q5"
+                                        value="Empowering"><span>Empowering</span></label>
+                            </div>
+                        </div>
+
+                        <div class="s6-form-group s6-input-anim s6-stacked">
+                            <p class="s6-solid-label">If you'd like, tell us why this matters to you (Optional)</p>
+                            <textarea id="s6-optional" name="optional" rows="3"></textarea>
                         </div>
 
                         <div class="s6-form-submit s6-input-anim">
