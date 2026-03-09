@@ -15211,25 +15211,29 @@ html,
     .HomepageHeroBespoke_videoWrapper__clMjH {
         width: calc(100% - 3.2rem) !important;
         height: 80vh !important;
-        margin: 0 auto 4rem !important;
+        margin: 0 auto 5rem !important;
         border-radius: 3.6rem !important;
         overflow: hidden !important;
-        clip-path: inset(0px round 3.6rem) !important;
-        -webkit-clip-path: inset(0px round 3.6rem) !important;
+        /* Use mask-image instead of clip-path — avoids the transform+clip conflict in WebKit */
         -webkit-mask-image: -webkit-radial-gradient(white, black) !important;
-        mask-image: -webkit-radial-gradient(white, black) !important;
+        mask-image: radial-gradient(white, black) !important;
+        /* Force GPU layer — must come AFTER border-radius for correct compositing */
         transform: translateZ(0) !important;
-        /* Entrance animation — fires after title words appear */
+        isolation: isolate !important;
+        /* Entrance animation */
         animation: s1-video-in 1s cubic-bezier(0.22, 1, 0.36, 1) both !important;
         animation-delay: 0.55s !important;
     }
 
-    /* Force all inner containers to also clip so video doesn't bleed corners */
+    /* Mirror border-radius + overflow on every child layer so nothing bleeds out */
+    .HomepageHeroBespoke_videoWrapper__clMjH .Media_root__qNahw,
     .HomepageHeroBespoke_videoWrapper__clMjH .Media_container__Cws3C,
     .HomepageHeroBespoke_videoWrapper__clMjH .Media_videoContainer__ID5oo,
-    .HomepageHeroBespoke_videoWrapper__clMjH .BaseVideo_root__D4U1s {
+    .HomepageHeroBespoke_videoWrapper__clMjH .BaseVideo_root__D4U1s,
+    .HomepageHeroBespoke_videoWrapper__clMjH #heroVideoEl {
         border-radius: 3.6rem !important;
         overflow: hidden !important;
+        transform: translateZ(0) !important;
     }
 
     #heroVideoEl {
@@ -15745,6 +15749,16 @@ html,
         margin: 0 auto;
         max-width: 600px;
         box-shadow: none;
+    }
+
+    /* Pre-promote animated elements to GPU layers so first-frame is instant on Android + iOS */
+    .section2-mobile-eyebrow,
+    .section2-mobile-heading,
+    .section2-mobile-image img {
+        will-change: transform, opacity;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
     }
 
     /* Eyebrow text */
